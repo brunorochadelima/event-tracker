@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import style from "./App.module.scss";
 import Card from "./components/Card";
 import Formulario from "./components/Formulario";
@@ -10,20 +10,22 @@ import { RecoilRoot } from "recoil";
 function App() {
   return (
     <RecoilRoot>
-      <div className={style.App}>
-        <div className={style.Coluna}>
-          <Card>
-            <Formulario />
-          </Card>
-          <hr />
-          <Card>
-            <ListaDeEventos />
-          </Card>
+      <Suspense fallback={"Carregando..."}>
+        <div className={style.App}>
+          <div className={style.Coluna}>
+            <Card>
+              <Formulario />
+            </Card>
+            <hr />
+            <Card>
+              <ListaDeEventos />
+            </Card>
+          </div>
+          <div className={style.Coluna}>
+            <Calendario />
+          </div>
         </div>
-        <div className={style.Coluna}>
-          <Calendario />
-        </div>
-      </div>
+      </Suspense>
     </RecoilRoot>
   );
 }
